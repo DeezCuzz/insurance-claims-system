@@ -1,0 +1,12 @@
+# compiled files and NetBeans build output
+out/
+build/
+dist/
+*.class
+nbproject/private/
+
+# the program's data (accounts and password hashes): never upload it
+ICS-data/
+data/
+*.bak
+*.tmp
