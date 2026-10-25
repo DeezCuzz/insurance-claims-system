@@ -1,10 +1,9 @@
 # Insurance Claims System (ICS)
 
-A stand-alone **Java Swing** desktop application for managing insurance **policies** and **claims**, built for
-**CC 106 – Information Management** (final project). It applies object-oriented programming (encapsulation,
+A stand-alone **Java Swing** desktop application for managing insurance **policies** and **claims**
 inheritance, polymorphism, abstraction) and stores all data in **ArrayLists and txt files — no database** (rubric V.1).
 
-> Group: ________________________ · Members: ________________________ · Section: ________
+> Group: 1 · Members: Tejada, Ceejay H. Angeles, Danrae R. Tayao, Renz Gabriel S. · Section: ________
 
 ## Contents
 1. [What the system does](#1-what-the-system-does)
@@ -673,11 +672,6 @@ payouts.txt   id | claimId | amount | paidDate | paidBy | breakdown
 - **Saving** writes a temporary file first, then swaps it in.
 - **Damaged lines** are skipped with a warning, and a `.bak` copy is kept.
 
-## 7. Testing
-
-- `SmokeTest.java`: **313 automatic checks** of every rule and computation (`java -cp out ics.SmokeTest` →
-  `313 passed, 0 failed`).
-- A 50-case manual test plan was run on the team's laptops.
 
 ## 8. Known limitations and future improvements
 - Passwords are SHA-256 without a salt (a real system would add a salt or use bcrypt).
