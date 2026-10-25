@@ -3,7 +3,7 @@
 A stand-alone **Java Swing** desktop application for managing insurance **policies** and **claims**
 inheritance, polymorphism, abstraction) and stores all data in **ArrayLists and txt files — no database** (rubric V.1).
 
-> Group: 1 · Members: Tejada, Ceejay H. Angeles, Danrae R. Tayao, Renz Gabriel S. · Section: ________
+> Group: 1 · Members: Tejada, Ceejay H. Angeles, Danrae R. Tayao, Renz Gabriel S. · Section: BSIT - 1C G1
 
 ## Contents
 1. [What the system does](#1-what-the-system-does)
