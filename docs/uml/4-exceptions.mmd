@@ -1,0 +1,33 @@
+classDiagram
+    direction TB
+    class Exception {
+        <<Java built-in>>
+    }
+    class ICSException {
+    }
+    class InvalidInputException {
+        -String fieldName
+        +getFieldName() String
+    }
+    class RuleException {
+    }
+    class AccessDeniedException {
+    }
+    class LoginException {
+        -int triesLeft
+        -boolean blocked
+        -boolean justBlocked
+        +blocked(boolean)$ LoginException
+        +getTriesLeft() int
+        +isBlocked() boolean
+        +isJustBlocked() boolean
+        +wrongPassword(int)$ LoginException
+    }
+    class DataStorageException {
+    }
+    Exception <|-- ICSException
+    ICSException <|-- InvalidInputException
+    ICSException <|-- RuleException
+    ICSException <|-- AccessDeniedException
+    ICSException <|-- LoginException
+    ICSException <|-- DataStorageException

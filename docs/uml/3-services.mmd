@@ -1,0 +1,95 @@
+classDiagram
+    direction TB
+    class AuthService {
+        +String DEFAULT_ADMIN_USERNAME$
+        +String DEFAULT_ADMIN_PASSWORD$
+        -DataStore store
+        +changePassword(User, String, String, String) void
+        +confirmPassword(User, String) void
+        +ensureFirstAdmin() boolean
+        +hash(String)$ String
+        +isUsingDefaultPassword(User) boolean
+        +login(String, String) User
+    }
+    class UserService {
+        -DataStore store
+        -AuthService auth
+        +countUsers() int
+        +createAccount(Role, String, String, String, String, String, String) User
+        +deactivate(String, User) void
+        +delete(String, User, String) void
+        +search(String) List~User~
+        +unblock(String) void
+        +updateProfile(String, String, String, String) void
+    }
+    class PolicyService {
+        -DataStore store
+        -AuthService auth
+        +cancel(String, User, String) void
+        +countPolicies() int
+        +delete(String, User, String) void
+        +holderName(String) String
+        +issue(PolicyType, String, String, String, String, String, String, String, String, String) Policy
+        +policyHolders() List~User~
+        +previewPremium(PolicyType, String, String, String) double
+        +search(String) List~Policy~
+        +update(String, String, String, String, String, String, String, String, String) Policy
+    }
+    class ClaimService {
+        +int FILING_WINDOW_DAYS$
+        -int MAX_DESCRIPTION_LENGTH$
+        -DataStore store
+        -AuthService auth
+        -Clock clock
+        +approve(String, User, String, String) Payout
+        +claimsOf(User) List~Claim~
+        +claimsOnPolicy(User, String) List~Claim~
+        +close(String, User) void
+        +countAwaitingReply(User) int
+        +countClaims() int
+        +countNeedingAction() int
+        +countPayouts() int
+        +deny(String, User, ClaimReason, String) void
+        +estimate(User, String, String) double
+        +file(User, String, String, String, String) Claim
+        +getClaim(String) Claim
+        +holderName(Claim) String
+        +holderOf(Claim) User
+        +payoutOf(Claim) Payout
+        +payoutSlip(String) List~String~
+        +payoutSlipFor(User, String) List~String~
+        +policiesOf(User) List~Policy~
+        +policyOf(Claim) Policy
+        +precheck(User, String, String) ClaimReason
+        +requestInfo(String, User, String) void
+        +respond(User, String, String) void
+        +resumeReview(String, User) void
+        +search(String, ClaimFilter) List~Claim~
+        +today() LocalDate
+        +userName(String) String
+    }
+    class ClaimFilter {
+        <<enumeration>>
+        Needs action
+        All claims
+        Under review
+        Info requested
+        Approved
+        Paid (older claims)
+        Denied
+        Rejected
+        Closed
+    }
+    class DataStore
+    class Validate
+    UserService --> AuthService : auth
+    PolicyService --> AuthService : auth
+    ClaimService --> AuthService : auth
+    AuthService --> DataStore : store
+    UserService --> DataStore : store
+    PolicyService --> DataStore : store
+    ClaimService --> DataStore : store
+    ClaimService ..> ClaimFilter
+    UserService ..> Validate
+    PolicyService ..> Validate
+    ClaimService ..> Validate

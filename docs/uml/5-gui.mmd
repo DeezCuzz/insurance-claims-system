@@ -1,0 +1,74 @@
+classDiagram
+    direction TB
+    class JFrame {
+        <<Swing>>
+    }
+    class JPanel {
+        <<Swing>>
+    }
+    class Main {
+        -DataStore store
+        -AuthService auth
+        +main(String[])$ void
+        +showLogin() void
+        +showShell(User) void
+    }
+    class BasePanel {
+        <<abstract>>
+        -int MAX_PASSWORD_TRIES$
+        -JPanel body
+        #JLabel statusLabel
+        -String protectedMessage
+        #addField(JPanel, int, JLabel, JComponent)$ void
+        #askAdminPassword(String, String) String
+        #confirm(String) boolean
+        #getBody() JPanel
+        #getProtectedMessage() String
+        #onKey(String, Runnable) void
+        +onShow() void
+        #runProtected(String, ProtectedAction) Outcome
+        #setStatus(String, boolean) void
+    }
+    class ShellPanel {
+        -CardLayout cards
+        -JPanel content
+        -Map~String, BasePanel~ pages
+        -List~Widgets.NavButton~ navButtons
+        +show(String) void
+    }
+    class LoginPanel
+    class Theme {
+        <<utility>>
+    }
+    class Widgets {
+        <<utility>>
+    }
+    class Dialogs {
+        <<utility>>
+    }
+    class DashboardPanel
+    class UserPanel
+    class PolicyPanel
+    class ReviewPanel
+    class ApplyPanel
+    class MyPoliciesPanel
+    class MyClaimsPanel
+    class ChangePasswordPanel
+    JFrame <|-- Main
+    JPanel <|-- BasePanel
+    JPanel <|-- ShellPanel
+    JPanel <|-- LoginPanel
+    BasePanel <|-- DashboardPanel
+    BasePanel <|-- UserPanel
+    BasePanel <|-- PolicyPanel
+    BasePanel <|-- ReviewPanel
+    BasePanel <|-- ApplyPanel
+    BasePanel <|-- MyPoliciesPanel
+    BasePanel <|-- MyClaimsPanel
+    BasePanel <|-- ChangePasswordPanel
+    Main --> LoginPanel : showLogin()
+    Main --> ShellPanel : showShell()
+    ShellPanel *-- "1..*" BasePanel : pages (by role)
+    BasePanel ..> Dialogs : password box
+    BasePanel ..> Theme : colours and fonts
+    ShellPanel ..> Widgets : sidebar buttons

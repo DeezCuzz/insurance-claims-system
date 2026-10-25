@@ -1,0 +1,235 @@
+classDiagram
+    direction TB
+    class Entity {
+        <<abstract>>
+        -String id
+        +getId() String
+        +setId(String) void
+        +toFileLine()* String
+    }
+    class User {
+        <<abstract>>
+        +int MAX_FAILED_ATTEMPTS$
+        -String username
+        -String passwordHash
+        -String fullName
+        -String contact
+        -String address
+        -int failedAttempts
+        -boolean blocked
+        +block() void
+        +canApplyForClaims()* boolean
+        +canManageUsers()* boolean
+        +canReviewClaims()* boolean
+        +create(Role, String, String, String, String, String, String, int, boolean)$ User
+        +fromFields(String[])$ User
+        +getAddress() String
+        +getContact() String
+        +getFailedAttempts() int
+        +getFullName() String
+        +getPasswordHash() String
+        +getRole()* Role
+        +getUsername() String
+        +isBlocked() boolean
+        +recordFailedAttempt() void
+        +resetFailedAttempts() void
+        +setAddress(String) void
+        +setContact(String) void
+        +setFullName(String) void
+        +setPasswordHash(String) void
+        +setUsername(String) void
+        +toFileLine() String
+        +unblock() void
+        +verifyPassword(String) boolean
+    }
+    class Admin {
+        +canApplyForClaims() boolean
+        +canManageUsers() boolean
+        +canReviewClaims() boolean
+        +getRole() Role
+    }
+    class Applicant {
+        +canApplyForClaims() boolean
+        +canManageUsers() boolean
+        +canReviewClaims() boolean
+        +getRole() Role
+    }
+    class Policy {
+        <<abstract>>
+        +double DISCOUNT_DEDUCTIBLE$
+        +double DISCOUNT_RATE$
+        -String ownerId
+        -LocalDate startDate
+        -LocalDate endDate
+        -double deductible
+        -double coverageLimit
+        -double limitUsed
+        -boolean cancelled
+        #amount(String, double)$ String
+        +applyPayout(double, double) void
+        +calculatePayout(double)* double
+        +calculatePremium()* double
+        +cancel() void
+        +explainPayout(double)* List~String~
+        #extraFields()* Object[]
+        +fromFields(String[])$ Policy
+        +getCoverageLimit() double
+        +getDeductible() double
+        +getEndDate() LocalDate
+        +getLimitUsed() double
+        +getOwnerId() String
+        +getRemainingLimit() double
+        +getStartDate() LocalDate
+        +getStatus(LocalDate) PolicyStatus
+        +getType()* PolicyType
+        +hasDeductibleDiscount() boolean
+        +isCancelled() boolean
+        +payoutFormula(double, String)* String
+        #php(double)$ String
+        #roundToCents(double)$ double
+        +toFileLine() String
+        #withDeductibleDiscount(double) double
+    }
+    class HealthPolicy {
+        +double PREMIUM_RATE$
+        -double reimbursementRate
+        -int waitingPeriodDays
+        -double deductibleMet
+        +applyPayout(double, double) void
+        +calculatePayout(double) double
+        +calculatePremium() double
+        +explainPayout(double) List~String~
+        #extraFields() Object[]
+        +getDeductibleMet() double
+        +getReimbursementRate() double
+        +getRemainingDeductible() double
+        +getType() PolicyType
+        +getWaitingPeriodDays() int
+        +getWaitingPeriodEnd() LocalDate
+        +isInWaitingPeriod(LocalDate) boolean
+        +payoutFormula(double, String) String
+    }
+    class AutoPolicy {
+        +double PREMIUM_RATE$
+        -double vehicleValue
+        -String plateNo
+        +calculatePayout(double) double
+        +calculatePremium() double
+        +explainPayout(double) List~String~
+        #extraFields() Object[]
+        +getPlateNo() String
+        +getType() PolicyType
+        +getVehicleValue() double
+        +payoutFormula(double, String) String
+    }
+    class Claim {
+        +int MAX_NOTE_LENGTH$
+        -String policyId
+        -LocalDate incidentDate
+        -LocalDate filedDate
+        -String description
+        -double claimedAmount
+        -double reserveAmount
+        -double approvedAmount
+        -double paidAmount
+        -ClaimStatus status
+        -ClaimReason reason
+        -String handledBy
+        -String reviewerNote
+        -String applicantNote
+        +approve(double, String) void
+        +changeStatus(ClaimStatus) void
+        +deny(ClaimReason, String) void
+        +fromFields(String[])$ Claim
+        +getApplicantNote() String
+        +getApprovedAmount() double
+        +getClaimedAmount() double
+        +getDescription() String
+        +getFiledDate() LocalDate
+        +getHandledBy() String
+        +getIncidentDate() LocalDate
+        +getPaidAmount() double
+        +getPolicyId() String
+        +getReason() ClaimReason
+        +getReserveAmount() double
+        +getReviewerNote() String
+        +getStatus() ClaimStatus
+        +reject(ClaimReason) void
+        +setApplicantNote(String) void
+        +setHandledBy(String) void
+        +setReserveAmount(double) void
+        +setReviewerNote(String) void
+        +toFileLine() String
+    }
+    class Payout {
+        -String claimId
+        -double amount
+        -LocalDate paidDate
+        -String paidBy
+        -String breakdown
+        +fromFields(String[])$ Payout
+        +getAmount() double
+        +getBreakdown() String
+        +getClaimId() String
+        +getPaidBy() String
+        +getPaidDate() LocalDate
+        +toFileLine() String
+    }
+    class Role {
+        <<enumeration>>
+        ADMIN
+        USER
+    }
+    class PolicyType {
+        <<enumeration>>
+        HEALTH
+        AUTO
+    }
+    class PolicyStatus {
+        <<enumeration>>
+        UPCOMING
+        ACTIVE
+        EXPIRED
+        CANCELLED
+    }
+    class ClaimStatus {
+        <<enumeration>>
+        FILED
+        REJECTED
+        UNDER_REVIEW
+        INFO_REQUESTED
+        APPROVED
+        DENIED
+        PAID
+        CLOSED
+    }
+    class ClaimReason {
+        <<enumeration>>
+        POLICY_INACTIVE
+        OUTSIDE_COVERAGE_PERIOD
+        WAITING_PERIOD
+        LATE_FILING
+        DUPLICATE_CLAIM
+        LIMIT_EXHAUSTED
+        EXCLUDED_CAUSE
+        SUSPECTED_FRAUD
+        INSUFFICIENT_DOCUMENTS
+    }
+    Entity <|-- User
+    Entity <|-- Policy
+    Entity <|-- Claim
+    Entity <|-- Payout
+    User <|-- Admin
+    User <|-- Applicant
+    Policy <|-- HealthPolicy
+    Policy <|-- AutoPolicy
+    User "1" <-- "0..*" Policy : ownerId (owns)
+    Policy "1" <-- "0..*" Claim : policyId (claimed on)
+    Claim "1" <-- "0..1" Payout : claimId (pays)
+    User "1" <-- "0..*" Claim : handledBy (Admin who decided)
+    User "1" <-- "0..*" Payout : paidBy (Admin who released)
+    User ..> Role
+    Policy ..> PolicyType
+    Policy ..> PolicyStatus
+    Claim --> ClaimStatus : status
+    Claim --> ClaimReason : reason

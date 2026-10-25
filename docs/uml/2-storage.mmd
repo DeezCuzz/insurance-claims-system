@@ -1,0 +1,66 @@
+classDiagram
+    direction TB
+    class Repository~T~ {
+        -ArrayList~T~ items
+        -Path file
+        -String prefix
+        -LineReader~T~ reader
+        -List~String~ warnings
+        +add(T) void
+        +delete(String) void
+        +findById(String) T
+        +getAll() List~T~
+        +getWarnings() List~String~
+        +load() void
+        +nextId() String
+        +save() void
+        +update(T) void
+    }
+    class LineReader~T~ {
+        <<interface>>
+        +read(String[])* T
+    }
+    class DataStore {
+        -Repository~User~ users
+        -Repository~Policy~ policies
+        -Repository~Claim~ claims
+        -Repository~Payout~ payouts
+        +claims() Repository~Claim~
+        +claimsOn(String) List~Claim~
+        +findUserByUsername(String) User
+        +loadAll() void
+        +loadWarnings() List~String~
+        +payoutFor(String) Payout
+        +payouts() Repository~Payout~
+        +policies() Repository~Policy~
+        +policiesOf(String) List~Policy~
+        +users() Repository~User~
+    }
+    class FileHelper {
+        +String FOLDER_NAME$
+        -String[] FILE_NAMES$
+        +dataFolder()$ Path
+        +join(Object[])$ String
+        +moveOldDataIfNeeded(Path)$ boolean
+        +split(String)$ String[]
+    }
+    class Validate {
+        +between(String, double, double, double)$ double
+        +nonNegative(String, double)$ double
+        +notBlank(String, String)$ String
+        +notNull(String, T)$ T
+        +parseAmount(String, String)$ double
+        +parseDate(String, String)$ LocalDate
+        +parseWholeNumber(String, String)$ int
+        +plainText(String, String, int)$ String
+        +positive(String, double)$ double
+        +strongPassword(String, String)$ String
+        +username(String, String)$ String
+    }
+    class Entity {
+        <<abstract>>
+    }
+    DataStore *-- "4" Repository : users, policies, claims, payouts
+    Repository o-- "0..*" Entity : items (T extends Entity)
+    Repository --> LineReader : reader
+    Repository ..> FileHelper : join / split lines
