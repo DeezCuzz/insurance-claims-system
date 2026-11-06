@@ -13,7 +13,7 @@ inheritance, polymorphism, abstraction) and stores all data in **ArrayLists and 
 4. [Business rules and computations](#5-business-rules-and-computations)
 5. [Data storage (txt files)](#6-data-storage-txt-files)
 6. [Testing](#7-testing)
-7. [Known limitations and future improvements](#8-known-limitations-and-future-improvements)
+7. [Future improvements](#8-Future-improvements)
 
 ## 1. What the system does
 
@@ -382,13 +382,11 @@ payouts.txt   id | claimId | amount | paidDate | paidBy | breakdown
 
 ## 6. Testing
 
-- A 50-case manual test plan was run on the team's laptops.
+- A 50-case manual test plan was run on the Ceewaii laptop
 
-## 7. Known limitations and future improvements
-- Passwords are SHA-256 without a salt.
-- Only the latest note and reply are kept per claim.
+## 7.future improvements
 - Future work: message history, premium receipts, a separate Staff role. IF IT'S GONNA CONTINUE? i hope so...
 
 
-"The deductible is ₱10,000. The sleep I lost building this was not covered."
+"akala basic lang deductible, hindi pala. yung tulog ko pala na deductan ng tulog shet."
 > > — Ceejay H. Tejada - < Logging off
