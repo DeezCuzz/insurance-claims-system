@@ -388,5 +388,5 @@ payouts.txt   id | claimId | amount | paidDate | paidBy | breakdown
 - Future work: message history, premium receipts, a separate Staff role. IF IT'S GONNA CONTINUE? i hope so...
 
 
-"akala basic lang deductible, hindi pala. yung tulog ko pala na deductan ng tulog shet."
+"akala ko basic lang deductible, hindi pala. ako pala ang nadeductan ng tulog shet."
 > > — Ceejay H. Tejada - < Logging off
