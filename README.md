@@ -2,7 +2,7 @@
 
 A stand-alone **Java Swing** desktop application for managing insurance **policies** and **claims**, built for
 **IT203** (final project). It applies object-oriented programming (encapsulation,
-inheritance, polymorphism, abstraction) and stores all data in **ArrayLists and txt files — no database** (rubric V.1).
+inheritance, polymorphism, abstraction) and stores all data in **ArrayLists and txt files**
 
 > Group: 1 · Members: Tejada, Ceejay H. Angeles, Danrae R. Tayao, Renz Gabriel S. · Section: 2CG1
 
