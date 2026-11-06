@@ -4,7 +4,7 @@ A stand-alone **Java Swing** desktop application for managing insurance **polici
 **IT203** (final project). It applies object-oriented programming (encapsulation,
 inheritance, polymorphism, abstraction) and stores all data in **ArrayLists and txt files — no database** (rubric V.1).
 
-> Group: 1 · Members: Tejada, Ceejay H. · Section: 1CG1
+> Group: 1 · Members: Tejada, Ceejay H. Angeles, Danrae R. Tayao, Renz Gabriel S. · Section: 2CG1
 
 ## Contents
 1. [What the system does](#1-what-the-system-does)
@@ -47,12 +47,12 @@ Three layers, each talking only to the one below it, plus the model shared by al
 | Encapsulation | All fields are `private`; a claim's status changes only through `changeStatus()`, which allows only legal moves (`Claim.Status.canMoveTo()`) |
 | Abstraction | `Entity`, `User` and `Policy` are abstract; screens call `policy.calculatePayout()` without knowing the formula |
 
-## 4. UML class diagram
+## 3. UML class diagram
 
 ![UML Class Diagram – Insurance Claims System (ICS)](docs/uml/ICS-UML-Class-Diagram.png)
 
-The full class diagram of the system: **62 classes** from the program’s 38 source files (nested classes are shown as `Outer.Inner`; the test file `SmokeTest.java` is left out).
-It is generated from the compiled code, so every class, attribute, default value, constructor and method matches
+The full class diagram of the system: **62 classes** from the program’s 38 source files (nested classes are shown as `Outer.Inner`;).
+It is COME from the compiled code, so every class, attribute, default value, constructor and method matches
 the source. For zooming in, open the PDF version: [`docs/uml/ICS-UML-Class-Diagram.pdf`](docs/uml/ICS-UML-Class-Diagram.pdf).
 
 **Notation**
@@ -62,8 +62,6 @@ the source. For zooming in, open the PDF version: [`docs/uml/ICS-UML-Class-Diagr
 - <u>underline</u> = static · *italic* = abstract
 - «abstract», «interface» and «enumeration» are written above the class name
 
-**How to read a box:** the class name, then its package and what it `extends` or `implements`; the attributes
-compartment; then the constructors and methods compartment.
 
 ### 3.1 Relationships
 
@@ -392,6 +390,5 @@ payouts.txt   id | claimId | amount | paidDate | paidBy | breakdown
 - Future work: message history, premium receipts, a separate Staff role. IF IT'S GONNA CONTINUE? i hope so...
 
 
-
-- "The deductible is ₱10,000. The sleep I lost building this was not covered."
-> — Ceejay H. Tejada - < Logging off
+"The deductible is ₱10,000. The sleep I lost building this was not covered."
+> > — Ceejay H. Tejada - < Logging off
