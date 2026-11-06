@@ -1,20 +1,19 @@
 # Insurance Claims System (ICS)
 
 A stand-alone **Java Swing** desktop application for managing insurance **policies** and **claims**, built for
-**CC 106 – Information Management** (final project). It applies object-oriented programming (encapsulation,
+**IT203** (final project). It applies object-oriented programming (encapsulation,
 inheritance, polymorphism, abstraction) and stores all data in **ArrayLists and txt files — no database** (rubric V.1).
 
-> Group: ________________________ · Members: ________________________ · Section: ________
+> Group: 1 · Members: Tejada, Ceejay H. · Section: 1CG1
 
 ## Contents
 1. [What the system does](#1-what-the-system-does)
-2. [How to run it](#2-how-to-run-it)
-3. [Architecture](#3-architecture)
-4. [UML class diagram](#4-uml-class-diagram)
-5. [Business rules and computations](#5-business-rules-and-computations)
-6. [Data storage (txt files)](#6-data-storage-txt-files)
-7. [Testing](#7-testing)
-8. [Known limitations and future improvements](#8-known-limitations-and-future-improvements)
+2. [Architecture](#3-architecture)
+3. [UML class diagram](#4-uml-class-diagram)
+4. [Business rules and computations](#5-business-rules-and-computations)
+5. [Data storage (txt files)](#6-data-storage-txt-files)
+6. [Testing](#7-testing)
+7. [Known limitations and future improvements](#8-known-limitations-and-future-improvements)
 
 ## 1. What the system does
 
@@ -26,21 +25,7 @@ There are two kinds of account. Only the **Admin** creates accounts (there is no
 | **User** (policyholder) | See their own policies · apply for a claim (with a live payout estimate and automatic checks) · follow their claims, reply to the Admin, and print their payout slip |
 | **Everyone** | Log in (3 wrong passwords block the account and close the program; only an Admin can unblock) · change their own password |
 
-## 2. How to run it
-
-Requirements: **JDK 17 or newer** (NetBeans' bundled JDK is fine).
-
-```
-cd src
-javac -d ../out $(find . -name "*.java")
-java -cp ../out ics.Main
-```
-In NetBeans: open the project and run `ics.Main` (F6). On the **first run** the program creates the Admin account
-**`admin` / `Admin123`**; change it immediately under **Change Password**.
-
-Data is saved in **`<home folder>/ICS-data`** (for example `C:\Users\<name>\ICS-data`).
-
-## 3. Architecture
+## 2. Architecture
 
 Three layers, each talking only to the one below it, plus the model shared by all:
 
@@ -80,7 +65,7 @@ the source. For zooming in, open the PDF version: [`docs/uml/ICS-UML-Class-Diagr
 **How to read a box:** the class name, then its package and what it `extends` or `implements`; the attributes
 compartment; then the constructors and methods compartment.
 
-### 4.1 Relationships
+### 3.1 Relationships
 
 The big diagram lists every member; this one shows how the records connect. Records refer to each other by **ID**
 (like foreign keys), because each is stored in its own txt file: a User owns policies (`ownerId`), a Policy has claims
@@ -335,7 +320,7 @@ Other relationships in the big diagram:
 - **Dependency:** `UserService`, `PolicyService` and `ClaimService` use `AuthService` (password checks) and `DataStore` (storage).
 - **Screens:** `ShellPanel` holds one screen per role, and `Main` switches between `LoginPanel` and `ShellPanel`.
 
-## 5. Business rules and computations
+## 4. Business rules and computations
 
 **Premium**
 - Health: **4% of the coverage limit**. Auto: **3% of the vehicle value**.
@@ -380,7 +365,7 @@ FILED ─▶ UNDER_REVIEW ─▶ APPROVED (payout released, slip printed) ─▶
 - 3 wrong passwords block the account (the count is saved immediately) and close the program.
 - The Admin re-types the password before deleting, cancelling or approving money.
 
-## 6. Data storage (txt files)
+## 5. Data storage (txt files)
 
 Four files in `ICS-data`, one record per line, fields separated by `|` (a typed `|` is saved as `\p`):
 
@@ -397,15 +382,16 @@ payouts.txt   id | claimId | amount | paidDate | paidBy | breakdown
 - **Saving** writes a temporary file first, then swaps it in.
 - **Damaged lines** are skipped with a warning, and a `.bak` copy is kept.
 
-## 7. Testing
+## 6. Testing
 
-- `SmokeTest.java`: **313 automatic checks** of every rule and computation (`java -cp out ics.SmokeTest` →
-  `313 passed, 0 failed`).
 - A 50-case manual test plan was run on the team's laptops.
 
-## 8. Known limitations and future improvements
-- Passwords are SHA-256 without a salt (a real system would add a salt or use bcrypt).
-- Money is a `double` rounded to centavos (banks use `BigDecimal`).
-- Approving writes three files one after another, not as one transaction.
+## 7. Known limitations and future improvements
+- Passwords are SHA-256 without a salt.
 - Only the latest note and reply are kept per claim.
-- Future work: message history, premium receipts, a separate Staff role.
+- Future work: message history, premium receipts, a separate Staff role. IF IT'S GONNA CONTINUE? i hope so...
+
+
+
+- "The deductible is ₱10,000. The sleep I lost building this was not covered."
+> — Ceejay H. Tejada - < Logging off
