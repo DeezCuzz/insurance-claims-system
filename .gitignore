@@ -5,7 +5,7 @@ dist/
 *.class
 nbproject/private/
 
-# the program's data (accounts and password hashes): never upload it
+# the program's data
 ICS-data/
 data/
 *.bak
