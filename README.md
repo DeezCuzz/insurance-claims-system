@@ -381,7 +381,6 @@ payouts.txt   id | claimId | amount | paidDate | paidBy | breakdown
 - **Damaged lines** are skipped with a warning, and a `.bak` copy is kept.
 
 ## 6. Testing
-
 - A 50-case manual test plan was run on the Ceewaii laptop
 
 ## 7.future improvements
